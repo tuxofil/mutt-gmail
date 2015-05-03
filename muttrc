@@ -1,0 +1,108 @@
+##
+## Mutt config file.
+##
+## See man 5 muttrc for option descriptions.
+##
+
+## ----------------------------------------
+## Files and paths
+
+set certificate_file = mutt_certificates
+set history_file = mutt_history
+set mailcap_path = mutt_mailcap
+set alias_file = mutt_alias
+set message_cachedir = mutt_cache
+set header_cache = mutt_cache/headers
+set tmpdir = mutt_tmp
+
+## ----------------------------------------
+## Common behaviour
+
+set narrow_tree = yes
+set delete = yes
+unset mark_old
+set postpone = ask-yes
+set fast_reply = yes
+set mime_forward = yes
+set beep_new
+unset move
+unset confirmappend
+set pipe_decode
+set timeout = 5
+
+set sidebar_visible = yes
+set sidebar_width = 25
+
+set status_format = "─[ Dir: %f ]─[%r%m msgs%?n? (%n new)?%?d? (%d to rm)?%?t? (%t tagged)? ]─%>─%?p?( %p postponed )?─"
+
+# index view settings
+set date_format = "%Y/%m/%d"
+set index_format = "[%Z] %D %-20.20F %s"
+set sort = threads
+set sort_aux = reverse-last-date-received
+set strict_threads
+
+# pager view options
+set pager_index_lines = 10
+set pager_context = 3
+set pager_stop
+set tilde
+set smart_wrap
+
+auto_view text/html
+auto_view application/msword
+
+## ----------------------------------------
+## Mailbox
+
+set mbox_type = Maildir
+set folder = Mail
+
+## ----------------------------------------
+## Composing
+
+set from = "john.doe@gmail.com"
+set realname = "John Doe"
+set signature = mutt_signature
+
+## ----------------------------------------
+## Key bindings
+
+bind index,pager <down> sidebar-next
+bind index,pager <up> sidebar-prev
+bind index,pager <right> sidebar-open
+
+## ----------------------------------------
+## Account settings
+
+mailboxes \
+    "+MyInbox" \
+    "+[Gmail].Drafts" \
+    "+[Gmail].Sent Mail" \
+    "+[Gmail].Spam" \
+    "+[Gmail].Trash"
+
+set spoolfile = "+MyInbox"
+set postponed = "+[Gmail].Drafts"
+set trash = "+[Gmail].Trash"
+
+## ----------------------------------------
+## Sending mail
+
+unset sendmail
+unset smtp_authenticators
+set smtp_url = "smtps://john.doe@smtp.gmail.com"
+set smtp_pass = j0hn.d0e.pAsSw0rD
+
+## ----------------------------------------
+## Address book
+
+set query_command = "abook --datafile abook.dat --mutt-query '%s'"
+macro index a "|abook --datafile abook.dat --add-email\n" 'add sender to abook'
+macro pager a "|abook --datafile abook.dat --add-email\n" 'add sender to abook'
+
+## ----------------------------------------
+## Encryption
+
+set crypt_autosign = yes
+source mutt_gpg

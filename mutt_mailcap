@@ -1,0 +1,2 @@
+text/html; w3m -dump -I %{charset} %s; nametemplate=%s.html; copiousoutput
+application/msword; catdoc %s; nametemplate=%s.doc; copiousoutput

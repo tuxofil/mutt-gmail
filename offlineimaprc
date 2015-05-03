@@ -1,0 +1,20 @@
+[general]
+accounts = Main
+metadata = offlineimap_metadatadir
+
+[Account Main]
+localrepository = Local
+remoterepository = Remote
+
+[Repository Local]
+type = Maildir
+localfolders = Mail
+
+[Repository Remote]
+maxconnections = 4
+type = Gmail
+remoteuser = john.doe@gmail.com
+remotepass = j0hn.d0e.pAsSw0rD
+sslcacertfile = OS-DEFAULT
+expunge = yes
+realdelete = yes
